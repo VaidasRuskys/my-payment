@@ -21,7 +21,7 @@ function my_payment_admin_menu(){
 	$menu_title = 'My payment';   
 	$capability = 'manage_options';   
 	$menu_slug  = 'my-payment-info';   
-	$function   = 'dashicons-cart';   
+	$function   = 'my_payment_admin_settings_page';
 	$icon_url   = 'dashicons-cart';   
 	$position   = 50;    
 	
@@ -34,4 +34,8 @@ function my_payment_admin_menu(){
 		$icon_url,
 		$position 
 	); 
-} 
+}
+
+function my_payment_admin_settings_page() {
+	include('admin/views/settings.php');
+}

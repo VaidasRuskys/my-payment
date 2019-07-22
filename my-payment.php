@@ -8,10 +8,10 @@
  * Author URI: http://www.mywebsite.com
  */
 
- add_action( 'the_content', 'my_thank_you_text' );
+ add_action( 'the_content', 'my_payment_content' );
 
- function my_thank_you_text ( $content ) {
-     return $content .= '<p>my_thank_you_text</p>';
+ function my_payment_content ( $content ) {
+     return $content .= get_option('my_payment_key');
  }
 
 add_action( 'admin_menu', 'my_payment_admin_menu' );  
@@ -37,5 +37,11 @@ function my_payment_admin_menu(){
 }
 
 function my_payment_admin_settings_page() {
+
+	if (!empty($_POST['my_payment_key'])) {
+		delete_option('my_payment_key');
+		add_option('my_payment_key', sanitize_text_field($_POST['my_payment_key']));
+	}
+
 	include('admin/views/settings.php');
 }

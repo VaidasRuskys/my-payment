@@ -45,3 +45,14 @@ function my_payment_admin_settings_page() {
 
 	include('admin/views/settings.php');
 }
+
+add_action( 'plugins_loaded', 'my_payment_gateway_init', 11 );
+function my_payment_gateway_init() {
+	include('gateway/class-wc-gateway-mypayment.php');
+}
+
+function my_payment_add_to_gateways( $gateways ) {
+	$gateways[] = 'WC_Gateway_MYPAYMENT';
+	return $gateways;
+}
+add_filter( 'woocommerce_payment_gateways', 'my_payment_add_to_gateways' );
